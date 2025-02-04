@@ -1,0 +1,19 @@
+
+@import "tailwindcss";
+body {
+  @apply bg-background flex justify-center items-center h-screen;
+}
+
+@theme {
+  --color-background: #FEFEFE;
+  --color-primary: #050505;
+  --color-secondary: #4f4f4f;
+  --color-tertiary: #FFF;
+  --color-accent: #f9b400;
+  --color-accent-secondary: #806bee;
+  --color-shadow: #D9D7EF;
+
+  --color-status-progress: #f9b400;
+  --color-status-complete: #3dd6a4;
+  --color-status-pending: #f44336;
+}
