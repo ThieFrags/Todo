@@ -5,6 +5,7 @@ import {Status} from "@shared/ui/components/status";
 import {CheckBox} from "@shared/ui/components/checkbox";
 import {ITask} from "@shared/interface/todo";
 import {useSaveTaskPresenter} from "@entities/cases/to-do/save-task/presenter";
+import {Trash2} from "lucide-react";
 
 interface IItemDetailsProps extends ComponentPropsWithoutRef<'li'> {
   task: ITask,
@@ -25,13 +26,16 @@ export const ItemDetails = ({className, task,...props}: IItemDetailsProps):React
 
   return (
     <li  className={makeClassname(taskItemStyles(), className)} {...props}>
-      <CheckBox/>
-      <input className="flex-1 min-w-[200px] pr-4" value={inputTask} onChange={(event) =>
-        (setInputTask(event.target.value))} onKeyDown={handleKeyDown}/>
+      <label className="flex gap-2">
+        <CheckBox/>
+        <input className="flex-1 min-w-[200px] pr-4" value={inputTask} onChange={(event) =>
+          (setInputTask(event.target.value))} onKeyDown={handleKeyDown}/>
+      </label>
       <p className="w-[130px]">
         {deadLine}
       </p>
-      <Status color='progress'>{statusState}</Status>
+      <Status className="text-center" color='progress'>{statusState}</Status>
+      <Trash2 className="flex ml-7 cursor-pointer"/>
     </li>
   );
 };

@@ -1,5 +1,5 @@
 // store.ts
-import {Derived, Store} from '@tanstack/store';
+import {Store} from '@tanstack/store';
 import {IGroupTaskList, ITask} from '@shared/interface/todo';
 import {EPriorityTask} from "@shared/enum";
 
@@ -18,32 +18,23 @@ const initialState: ITaskStoreState = {
 // Создаем глобальное хранилище
 const globalStore = new Store<ITaskStoreState>(initialState);
 
-const taskLists = new Derived({
-  fn: ({currDepVals}) => {
-    const tasks = currDepVals[0].tasks;
-    console.log(tasks)
-    return Object.values(
-      tasks.reduce((acc, task) => {
-        acc[task.priority] = acc[task.priority] || { priority: task.priority, tasks: [] };
-        acc[task.priority].tasks.push(task);
-        return acc;
-      }, {} as Record<EPriorityTask, IGroupTaskList>)
-    );
-  },
-  deps: [globalStore] // следит за изменениями в глобальном store
-});
+export const addTasks = (task: ITask | ITask[]): void => {
+  globalStore.setState((prev) => {
+    const tasks = [...prev.tasks, ...Array.isArray(task) ? task : [task]];
 
-// Монтируем, чтобы запустить подписку
-taskLists.mount((newTaskLists) => {
-  globalStore.setState((prev) => ({
-    ...prev,
-    taskLists: newTaskLists
-  }));
-});
-
-// Позже, если нужно отключить
-// unmountTaskLists();
-
+    return {
+      ...prev,
+      tasks,
+      taskLists: Object.values(
+        tasks.reduce((acc, task) => {
+          acc[task.priority] = acc[task.priority] || {priority: task.priority, tasks: []};
+          acc[task.priority].tasks.push(task);
+          return acc;
+        }, {} as Record<EPriorityTask, IGroupTaskList>)
+      )
+    }
+  })
+}
 
 export const updateGlobalStore = (params:ITaskStoreState) => {
   console.log('updateGlobalStore', params);

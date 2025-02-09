@@ -1,14 +1,14 @@
 import {ITask} from "@shared/interface/todo";
-import globalStore from "@entities/store";
+import {addTasks} from "@entities/store";
 import {useCreateTaskUseCase} from "@entities/cases/to-do/create-task/use-case";
 
-export const useSaveTaskPresenter = () => {
+export const useCreateTaskPresenter = () => {
   const {mutateAsync} = useCreateTaskUseCase()
 
   const handleSumbit = async (port:Omit<ITask, 'id'>) => {
     const savedTask = await mutateAsync(port)
 
-    globalStore.setState((prev) => ({...prev, tasks: [...prev.tasks, savedTask]}))
+    addTasks(savedTask)
   }
 
   return {handleSumbit}

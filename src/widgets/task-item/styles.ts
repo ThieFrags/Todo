@@ -1,4 +1,4 @@
 import {cva} from "class-variance-authority";
 
 export const taskItemStyles =
-  cva('font-sans text-xl font-light flex flex-row items-center gap-4 py-2 px-4 pr-40')
+  cva('font-sans text-xl font-light grid grid-cols-[1fr_120px_180px_80px] px-4 items-center gap-4 py-2 ')

@@ -11,4 +11,8 @@ enum EProgressTask {
   Pending = 'Pending',
 };
 
-export {EProgressTask, EPriorityTask};
+enum EModalKey {
+  Add = 'addTask',
+}
+
+export {EProgressTask, EPriorityTask, EModalKey};
