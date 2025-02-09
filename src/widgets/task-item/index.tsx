@@ -6,6 +6,8 @@ import {CheckBox} from "@shared/ui/components/checkbox";
 import {ITask} from "@shared/interface/todo";
 import {useSaveTaskPresenter} from "@entities/cases/to-do/save-task/presenter";
 import {Trash2} from "lucide-react";
+import {Input} from "@shared/ui/components";
+import {format} from "date-fns";
 
 interface IItemDetailsProps extends ComponentPropsWithoutRef<'li'> {
   task: ITask,
@@ -28,13 +30,13 @@ export const ItemDetails = ({className, task,...props}: IItemDetailsProps):React
     <li  className={makeClassname(taskItemStyles(), className)} {...props}>
       <label className="flex gap-2">
         <CheckBox/>
-        <input className="flex-1 min-w-[200px] pr-4" value={inputTask} onChange={(event) =>
+        <Input value={inputTask} onChange={(event) =>
           (setInputTask(event.target.value))} onKeyDown={handleKeyDown}/>
       </label>
       <p className="w-[130px]">
-        {deadLine.toString()}
+        {format(deadLine, "dd/MM/yyyy")}
       </p>
-      <Status className="text-center" color='progress'>{statusState}</Status>
+      <Status className="text-center" color={statusState}>{statusState}</Status>
       <Trash2 className="flex ml-7 cursor-pointer"/>
     </li>
   );

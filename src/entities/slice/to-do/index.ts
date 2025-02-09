@@ -1,6 +1,6 @@
 import {ITask} from "@shared/interface/todo";
 import {EPriorityTask, EProgressTask} from "@shared/enum";
-import globalStore from "@entities/store";
+import globalStore, {addTasks} from "@entities/store";
 
 function randomElement<T,>(arr:T[]) {
   const randomIndex = Math.round(Math.random() * (arr.length - 1));
@@ -22,11 +22,14 @@ function createRandomItem() {
   return taskItem
 }
 
-const tasks = Array.from({length: 4}).map(() => createRandomItem());
+
 
 export const getCurrentTaskList = async (): Promise<ITask[]> => {
   const globalTasks = globalStore.state.tasks
-  console.log(globalTasks.length > 0 ? globalTasks : tasks)
+  if (globalTasks.length > 0) return Promise.resolve(globalTasks);
+
+  const tasks = Array.from({length: 4}).map(() => createRandomItem());
+  addTasks(tasks);
   return Promise.resolve(globalTasks.length > 0 ? globalTasks : tasks);
 }
 

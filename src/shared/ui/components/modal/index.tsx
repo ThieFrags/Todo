@@ -19,7 +19,7 @@ export const Modal: FC<ImodalProps> = ({className, children, id, ...props}) => {
         type="button"
         onClick={() => closeModal(id)}
       >
-        <span className="button__text font-sans w-full text-xl" >Закрыть</span>
+        <span>Закрыть</span>
       </button>
     </dialog>
   )

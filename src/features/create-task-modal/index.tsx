@@ -24,22 +24,22 @@ const CreateModalTask = () => {
 
   return (
     <Modal id={EModalKey.Add} className={'size-[500px]'}>
-      <form onSubmit={submit}>
+      <form className={'flex flex-col gap-8'} onSubmit={submit}>
 
         <p className={"font-sans w-full text-xl text-center"}>Опишите задание</p>
-        <Input value={form.taskName} onChange={(event) => setForm(prev => ({...prev, taskName: event.target.value}))}/>
+        <Input placeholder={'Введите задание'} value={form.taskName} onChange={(event) => setForm(prev => ({...prev, taskName: event.target.value}))}/>
 
-        <DatePicker selected={form.deadLine} onChange={(date) => setForm(prev => ({...prev, deadLine: date || new Date()}))}/>
+        <DatePicker className={"border text-center"} wrapperClassName={'self-center'} selected={form.deadLine} onChange={(date) => setForm(prev => ({...prev, deadLine: date || new Date()}))}/>
 
-        <select value={form.statusState} onChange={(event) => setForm(prev => ({...prev, statusState: event.target.value as EProgressTask}))}>
+        <select className={'cursor-pointer'} value={form.statusState} onChange={(event) => setForm(prev => ({...prev, statusState: event.target.value as EProgressTask}))}>
           {Object.values(EProgressTask).map((item) => <option key={item}>{item}</option> )}
         </select>
 
-        <select value={form.priority} onChange={(event) => setForm(prev => ({...prev, priority: event.target.value as EPriorityTask}))}>
+        <select className={'cursor-pointer'} value={form.priority} onChange={(event) => setForm(prev => ({...prev, priority: event.target.value as EPriorityTask}))}>
           {Object.values(EPriorityTask).map((item) => <option key={item}>{item}</option> )}
         </select>
 
-        <Button className={"font-sans text-xl text-center text-black"} type={'submit'}>Создать задание</Button>
+        <Button className={"font-sans text-xl text-center text-black cursor-pointer"} type={'submit'}>Создать задание</Button>
       </form>
     </Modal>
   );

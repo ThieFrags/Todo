@@ -18,9 +18,9 @@ const MainPage = () => {
     <MainWrapper className="min-w-[1200px] w-full">
       <Header />
       {groupedTaskList?.map((group) => (
-        <Details title={group.priority}>
+        <Details title={group.priority} key={group.priority}>
           {group.tasks.map(item =>
-            <ItemDetails task={item}/>
+            <ItemDetails task={item} key={item.id}/>
           )}
         </Details>
       ))}
