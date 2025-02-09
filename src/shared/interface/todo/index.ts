@@ -4,7 +4,7 @@ export type ITask = {
   id: string,
   taskName: string;
   statusState: EProgressTask;
-  deadLine: string;
+  deadLine: Date;
   priority: EPriorityTask;
 }
 

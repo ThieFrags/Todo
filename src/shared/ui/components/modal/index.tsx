@@ -11,7 +11,6 @@ export const Modal: FC<ImodalProps> = ({className, children, id, ...props}) => {
 
   return (
     <dialog className={makeClassname(modalStyles(), className)} id={id} {...props}>
-      <p className={"font-sans w-full text-xl text-center"}>Опишите задание</p>
       <div className={""}>
         {children}
       </div>
@@ -20,7 +19,7 @@ export const Modal: FC<ImodalProps> = ({className, children, id, ...props}) => {
         type="button"
         onClick={() => closeModal(id)}
       >
-        <span className="button__text font-sans w-full text-xl" >Добавить заметку</span>
+        <span className="button__text font-sans w-full text-xl" >Закрыть</span>
       </button>
     </dialog>
   )

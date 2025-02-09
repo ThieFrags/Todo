@@ -32,7 +32,7 @@ export const ItemDetails = ({className, task,...props}: IItemDetailsProps):React
           (setInputTask(event.target.value))} onKeyDown={handleKeyDown}/>
       </label>
       <p className="w-[130px]">
-        {deadLine}
+        {deadLine.toString()}
       </p>
       <Status className="text-center" color='progress'>{statusState}</Status>
       <Trash2 className="flex ml-7 cursor-pointer"/>

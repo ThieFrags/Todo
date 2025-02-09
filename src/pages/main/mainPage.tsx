@@ -5,8 +5,7 @@ import MainWrapper from "@shared/ui/wrappers/main";
 import {useGetTaskListPresenter} from "src/entities/cases/to-do/get-list/presenter";
 import {useEffect} from "react";
 import globalStore from "@entities/store";
-import {Modal} from "src/shared/ui/components/modal";
-import {EModalKey} from "@shared/enum";
+import CreateModalTask from "@features/create-task-modal";
 
 const MainPage = () => {
 
@@ -25,7 +24,7 @@ const MainPage = () => {
           )}
         </Details>
       ))}
-
+      <CreateModalTask />
     </MainWrapper>
   );
 };

@@ -1,5 +1,6 @@
 import {ITask} from "@shared/interface/todo";
 import {EPriorityTask, EProgressTask} from "@shared/enum";
+import globalStore from "@entities/store";
 
 function randomElement<T,>(arr:T[]) {
   const randomIndex = Math.round(Math.random() * (arr.length - 1));
@@ -10,12 +11,11 @@ function randomElement<T,>(arr:T[]) {
 function createRandomItem() {
 
   const arrRandomTask = ['Пить пиво', 'Чух чух', 'Водочка', 'Лодочка', 'Кровать', 'Кушать']
-  const arrRandomdeadLine = ['25','11','4','23','9','27']
   const taskItem:ITask = {
     id: crypto.randomUUID(),
     taskName: randomElement(arrRandomTask),
     statusState: randomElement(Object.values(EProgressTask)),
-    deadLine: randomElement(arrRandomdeadLine),
+    deadLine: new Date(),
     priority: randomElement(Object.values(EPriorityTask)),
   }
 
@@ -24,16 +24,10 @@ function createRandomItem() {
 
 const tasks = Array.from({length: 4}).map(() => createRandomItem());
 
-// const groupedTasks: IGroupTaskList[] = Object.values(
-//   tasks.reduce((acc, task) => {
-//     acc[task.priority] = acc[task.priority] || { priority: task.priority, tasks: [] };
-//     acc[task.priority].tasks.push(task);
-//     return acc;
-//   }, {} as Record<EPriorityTask, IGroupTaskList>)
-// );
-
 export const getCurrentTaskList = async (): Promise<ITask[]> => {
-  return Promise.resolve(tasks);
+  const globalTasks = globalStore.state.tasks
+  console.log(globalTasks.length > 0 ? globalTasks : tasks)
+  return Promise.resolve(globalTasks.length > 0 ? globalTasks : tasks);
 }
 
 export const saveCurrentTask = async (port:ITask): Promise<ITask> => {
