@@ -15,7 +15,7 @@ const MainPage = () => {
   }, [globalStore.state.taskLists])
 
   return (
-    <MainWrapper className="min-w-[1200px] w-full">
+    <MainWrapper className="min-w-[1300px] w-full">
       <Header />
       {groupedTaskList?.map((group) => (
         <Details title={group.priority} key={group.priority}>

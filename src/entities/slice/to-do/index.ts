@@ -1,5 +1,5 @@
 import {ITask} from "@shared/interface/todo";
-import {EPriorityTask, EProgressTask} from "@shared/enum";
+import {EPriorityTask, EAreaTask} from "@shared/enum";
 import globalStore, {addTasks} from "@entities/store";
 
 function randomElement<T,>(arr:T[]) {
@@ -14,15 +14,14 @@ function createRandomItem() {
   const taskItem:ITask = {
     id: crypto.randomUUID(),
     taskName: randomElement(arrRandomTask),
-    statusState: randomElement(Object.values(EProgressTask)),
+    statusState: randomElement(Object.values(EAreaTask)),
     deadLine: new Date(),
     priority: randomElement(Object.values(EPriorityTask)),
+    isComplete: false,
   }
 
   return taskItem
 }
-
-
 
 export const getCurrentTaskList = async (): Promise<ITask[]> => {
   const globalTasks = globalStore.state.tasks
@@ -39,4 +38,8 @@ export const saveCurrentTask = async (port:ITask): Promise<ITask> => {
 
 export const createCurrentTask = async (port:Omit<ITask, 'id'>): Promise<ITask> => {
   return Promise.resolve({...port, id: crypto.randomUUID()});
+}
+
+export const deleteCurrentTask = async (port: ITask): Promise<ITask> => {
+  return Promise.resolve(port)
 }

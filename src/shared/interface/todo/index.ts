@@ -1,11 +1,12 @@
-import {EPriorityTask, EProgressTask} from "@shared/enum";
+import {EPriorityTask, EAreaTask} from "@shared/enum";
 
 export type ITask = {
   id: string,
   taskName: string;
-  statusState: EProgressTask;
+  statusState: EAreaTask;
   deadLine: Date;
   priority: EPriorityTask;
+  isComplete: boolean;
 }
 
 export type IGroupTaskList = {

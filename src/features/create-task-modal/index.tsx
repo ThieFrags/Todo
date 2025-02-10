@@ -1,4 +1,4 @@
-import {EModalKey, EPriorityTask, EProgressTask} from "@shared/enum";
+import {EModalKey, EPriorityTask, EAreaTask} from "@shared/enum";
 import {Modal} from "@shared/ui/components/modal";
 import {useCreateTaskPresenter} from "@entities/cases/to-do/create-task/presenter";
 import {useState} from "react";
@@ -14,7 +14,7 @@ const CreateModalTask = () => {
     taskName:'',
     deadLine: new Date(),
     priority:EPriorityTask.Low,
-    statusState:EProgressTask.Pending,
+    statusState:EAreaTask.Studying,
   }))
 
   const submit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -31,8 +31,8 @@ const CreateModalTask = () => {
 
         <DatePicker className={"border text-center"} wrapperClassName={'self-center'} selected={form.deadLine} onChange={(date) => setForm(prev => ({...prev, deadLine: date || new Date()}))}/>
 
-        <select className={'cursor-pointer'} value={form.statusState} onChange={(event) => setForm(prev => ({...prev, statusState: event.target.value as EProgressTask}))}>
-          {Object.values(EProgressTask).map((item) => <option key={item}>{item}</option> )}
+        <select className={'cursor-pointer'} value={form.statusState} onChange={(event) => setForm(prev => ({...prev, statusState: event.target.value as EAreaTask}))}>
+          {Object.values(EAreaTask).map((item) => <option key={item}>{item}</option> )}
         </select>
 
         <select className={'cursor-pointer'} value={form.priority} onChange={(event) => setForm(prev => ({...prev, priority: event.target.value as EPriorityTask}))}>

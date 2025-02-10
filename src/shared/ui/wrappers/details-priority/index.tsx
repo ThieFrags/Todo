@@ -8,9 +8,11 @@ interface IDetailsProps extends ComponentPropsWithoutRef<'details'> {
 
 export const Details: FC<IDetailsProps> = ({className, title, children,...props}) => {
   const [open, setOpen] = useState(true);
-  const handleClick = () => {
+  const handleClick = (e: React.MouseEvent<HTMLElement>) => {
+    e.preventDefault();
     setOpen((prevState) => !prevState)
   }
+
   return (
       <details  open={open} className= {className} {...props}>
         <summary onClick={handleClick} className={summaryStyles()}>

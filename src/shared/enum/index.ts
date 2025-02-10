@@ -5,14 +5,14 @@ enum EPriorityTask {
   Low = 'Low'
 };
 
-enum EProgressTask {
-  Completed = 'Completed',
-  InProgress = 'In Progress',
-  Pending = 'Pending',
+enum EAreaTask {
+  Home = 'Дом',
+  Work = 'Работа',
+  Studying = 'Обучение',
 };
 
 enum EModalKey {
   Add = 'addTask',
 }
 
-export {EProgressTask, EPriorityTask, EModalKey};
+export {EAreaTask, EPriorityTask, EModalKey};
